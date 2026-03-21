@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMT OFFICIAL | Gaming Database</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root { --bg: #050505; --accent: #ff4d00; --card-w: 500px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none !important; }
+        
+        body {
+            background: radial-gradient(circle at 50% 50%, #2e120b 0%, #050505 100%);
+            color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; min-height: 100vh;
+        }
+
+        header {
+            padding: 15px 5%; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 1000;
+            display: flex; flex-direction: column; gap: 15px;
+        }
+
+        @media (min-width: 768px) {
+            header { flex-direction: row; justify-content: space-between; align-items: center; padding: 15px 8%; }
+            .search-container { max-width: 400px; margin: 0; }
+        }
+
+        .brand-box { display: flex; align-items: center; gap: 12px; }
+        .logo-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--accent); object-fit: cover; background: #000; }
+        .brand h1 { font-family: 'Syncopate'; font-size: 12px; letter-spacing: 1px; color: #fff; }
+
+        .search-container { position: relative; width: 100%; }
+        .search-container input {
+            width: 100%; padding: 12px 15px 12px 45px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);
+            color: white; outline: none; transition: 0.3s;
+        }
+        .search-container input:focus { border-color: var(--accent); background: rgba(255,77,0,0.08); }
+        .search-container i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #666; }
+
+        main { display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+        .viewer-box { position: relative; width: 100%; max-width: var(--card-w); height: 380px; }
+        
+        .card {
+            position: absolute; width: 100%; opacity: 0; display: none;
+            transform: scale(0.95) translateY(10px); transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .card.active { display: block; opacity: 1; transform: scale(1) translateY(0); z-index: 10; }
+        .card.exit { display: block; opacity: 0; transform: scale(1.05) translateY(-15px); }
+
+        .img-frame { 
+            width: 100%; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.1); background: #111;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+        .img-frame img { width: 100%; height: 100%; object-fit: cover; }
+        .v-title { text-align: center; margin-top: 20px; font-weight: 800; font-size: 16px; line-height: 1.4; padding: 0 10px; color: #fff; }
+        .click-tag { display: block; text-align: center; color: var(--accent); font-size: 11px; font-weight: 700; margin-top: 8px; text-transform: uppercase; }
+
+        .info-grid {
+            display: grid; grid-template-columns: 1fr; gap: 20px;
+            width: 100%; max-width: 900px; margin: 40px auto; padding: 0 20px;
+        }
+        @media (min-width: 900px) { .info-grid { grid-template-columns: 2fr 1fr; } }
+
+        .desc-box { padding: 30px; border-radius: 25px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
+        .stats-box { padding: 30px; border-radius: 25px; background: var(--accent); color: #fff; text-align: center; }
+        .stat-val { font-size: 32px; font-weight: 900; display: block; }
+        .stat-lab { font-size: 11px; font-family: 'Syncopate'; opacity: 0.8; letter-spacing: 1px; }
+
+        .socials { display: flex; justify-content: center; gap: 15px; padding: 20px 20px 80px; flex-wrap: wrap; }
+        .s-btn {
+            padding: 12px 25px; border-radius: 50px; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1); color: #fff; font-weight: 700; font-size: 13px; transition: 0.3s;
+        }
+        .s-btn:hover { background: var(--accent); transform: translateY(-3px); }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="brand-box">
+        <img src="https://yt3.googleusercontent.com/qAWJyGdeLk4R5mT75uCVEP9fWLcVJhIDgVPqQfFnLXLWacn2s8V9sbw5sH4xXyeekbBGltafJQ=s160-c-k-c0x00ffffff-no-rj" onerror="this.src='./logo.png'" class="logo-img">
+        <div class="brand"><h1>TMT OFFICIAL</h1></div>
+    </div>
+    <div class="search-container">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="searchInput" placeholder="Search videos...">
+    </div>
+</header>
+
+<main><div class="viewer-box" id="viewer-box"></div></main>
+
+<div class="info-grid">
+    <section class="desc-box">
+        <h2 style="color:var(--accent); font-family:'Syncopate'; font-size:13px; margin-bottom:15px;">🔥 CHANNEL MISSION</h2>
+        <p style="line-height:1.7; color:#bbb; font-size: 14px;">
+            Welcome to the home of high-energy <b>Free Fire</b> gameplay. Join 40K+ fans as we showcase the best mobile action!
+        </p>
+    </section>
+    <section class="stats-box">
+        <span class="stat-lab">Subscribers</span>
+        <span class="stat-val">50K+</span>
+        <div style="height:1px; background:rgba(255,255,255,0.2); margin:15px 0;"></div>
+        <span class="stat-lab">Videos Cataloged</span>
+        <span id="vCount" class="stat-val">...</span>
+    </section>
+</div>
+
+<div class="socials">
+    <a href="https://youtube.com/@tmt_official-y2x" target="_blank" class="s-btn">YouTube</a>
+    <a href="https://www.instagram.com/tmt_rocky_yt" target="_blank" class="s-btn">Instagram</a>
+</div>
+
+<script>
+    const container = document.getElementById('viewer-box');
+    const searchInput = document.getElementById('searchInput');
+    const vCount = document.getElementById('vCount');
+
+    let allData = [];
+    let filteredData = [];
+    let currentIdx = 0;
+    let rotationTimer = null; // Single timer reference
+
+    async function init() {
+        try {
+            const res = await fetch('data.csv?t=' + Date.now());
+            const text = await res.text();
+            allData = text.split('\n').map(l => l.trim()).filter(l => l.length > 10).map(line => {
+                const last = line.lastIndexOf(',');
+                const second = line.lastIndexOf(',', last - 1);
+                return {
+                    title: line.substring(0, second).trim(),
+                    id: line.substring(second + 1, last).trim(),
+                    img: line.substring(last + 1).trim()
+                };
+            });
+            vCount.innerText = allData.length + "+";
+            filteredData = [...allData];
+            render();
+            startRotation();
+        } catch (e) { console.error(e); }
+    }
+
+    function render() {
+        container.innerHTML = '';
+        currentIdx = 0; // Reset index when searching
+        filteredData.forEach((v, i) => {
+            const card = document.createElement('div');
+            card.className = `card ${i===0?'active':''}`;
+            card.style.display = i===0 ? 'block' : 'none';
+            const ytMax = `https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`;
+            const ytHq = `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
+            card.innerHTML = `
+                <a href="https://youtube.com/watch?v=${v.id}" target="_blank">
+                    <div class="img-frame">
+                        <img src="thumbnails/${v.img}" onerror="this.onerror=null; this.src='${ytMax}'; this.addEventListener('error', function(){ this.src='${ytHq}' }, {once: true});">
+                    </div>
+                    <div class="v-title">${v.title}</div>
+                    <span class="click-tag">⚡ Tap to watch clip</span>
+                </a>`;
+            container.appendChild(card);
+        });
+    }
+
+    function rotate() {
+        const cards = document.querySelectorAll('.card');
+        if (cards.length <= 1) return;
+
+        // 1. Exit current
+        const current = cards[currentIdx];
+        current.classList.remove('active');
+        current.classList.add('exit');
+
+        // 2. Prep next
+        currentIdx = (currentIdx + 1) % cards.length;
+        const next = cards[currentIdx];
+        
+        next.style.display = 'block';
+        setTimeout(() => {
+            next.classList.add('active');
+            // 3. Cleanup old
+            setTimeout(() => {
+                current.style.display = 'none';
+                current.classList.remove('exit');
+            }, 600);
+        }, 50);
+    }
+
+    function startRotation() {
+        if (rotationTimer) clearInterval(rotationTimer);
+        if (filteredData.length > 1) {
+            rotationTimer = setInterval(rotate, 2500);
+        }
+    }
+
+    searchInput.addEventListener('input', e => {
+        const term = e.target.value.toLowerCase();
+        filteredData = allData.filter(v => v.title.toLowerCase().includes(term));
+        render();
+        startRotation();
+    });
+
+    window.onload = init;
+</script>
+</body>
+</html>
