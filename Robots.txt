@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /private/
 
-# Sitemaps
-Sitemap: https://tmtofficial.shop/sitemap.xml
 Sitemap: https://tmt-official.netlify.app/sitemap.xml
