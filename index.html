@@ -6,7 +6,8 @@
     <title>TMT OFFICIAL | 1,300+ Gaming Database</title>
     
     <link rel="canonical" href="https://tmt-official.netlify.app/" />
-    <meta name="description" content="Official TMT Official Free Fire Database. Explore 1,300+ highlights, headshots, and pro gameplay clips from TMT Rocky.">
+    <meta name="description" content="Official TMT OFFICIAL Gaming Database. Explore 1,300+ Free Fire highlights, headshots, and pro gameplay clips from TMT Rocky.">
+    <meta name="keywords" content="TMT OFFICIAL, TMT Rocky, Free Fire highlights, Gaming Database">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#050505">
     
@@ -51,7 +52,7 @@
         .card.active { display: block; opacity: 1; z-index: 10; }
         .img-frame { width: 100%; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background: #000; }
         .img-frame img { width: 100%; height: 100%; object-fit: cover; }
-        .v-title { text-align: center; margin-top: 20px; font-weight: 700; font-size: 18px; color: #fff; padding: 0 10px; }
+        .v-title { text-align: center; margin-top: 20px; font-weight: 700; font-size: 18px; color: #fff; padding: 0 10px; min-height: 50px; }
         .click-tag { display: block; text-align: center; color: var(--accent); font-size: 12px; font-weight: 800; margin-top: 10px; text-transform: uppercase; }
         .info-grid { display: grid; grid-template-columns: 1fr; gap: 20px; width: 100%; max-width: 950px; margin: 20px auto; padding: 0 15px; }
         @media (min-width: 900px) { .info-grid { grid-template-columns: 1.8fr 1fr; } }
@@ -71,7 +72,7 @@
     </div>
     <div class="search-container">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input id="searchInput" placeholder="Search 1,300+ highlights...">
+        <input id="searchInput" placeholder="Search 1,300+ clips...">
     </div>
 </header>
 
@@ -79,8 +80,8 @@
 
 <div class="info-grid">
     <section class="desc-box">
-        <h2 style="color:var(--accent); font-family:'Syncopate'; font-size:12px; margin-bottom:15px;">⚡ DATABASE ARCHIVE</h2>
-        <p style="color:#ccc; font-size: 15px;">Official <span style="color:var(--accent); font-weight:800;">TMT OFFICIAL</span> database. Explore our gaming library.</p>
+        <h2 style="color:var(--accent); font-family:'Syncopate'; font-size:11px; margin-bottom:12px;">⚡ LIVE ARCHIVE</h2>
+        <p style="color:#ccc; font-size: 15px;">Official <span style="color:var(--accent); font-weight:800;">TMT OFFICIAL</span> database. Accessing our high-speed library.</p>
     </section>
     <section class="stats-box">
         <span style="font-size:10px; font-family:'Syncopate';">Total Database</span>
@@ -121,7 +122,10 @@
             filteredData = [...allData];
             render();
             startRotation();
-        } catch (e) { console.error("Error loading CSV"); vCount.innerText = "1,300+"; }
+        } catch (e) { 
+            console.error("Data Load Error"); 
+            vCount.innerText = "1,300+"; 
+        }
     }
 
     function render() {
@@ -135,15 +139,15 @@
             card.className = `card ${i===currentIdx?'active':''}`;
             card.style.display = i===currentIdx ? 'block' : 'none';
             
-            // TRIPLE-CHECK LOGIC:
-            // 1. Try ./thumbnail/ folder
-            // 2. If fail, try the root folder
-            // 3. If fail, load YouTube MQ Thumbnail
+            // SEO-Optimized Image Loading
+            // Tries local thumbnail folder -> Tries root folder -> Tries YouTube
             card.innerHTML = `
                 <a href="https://youtube.com/watch?v=${v.id}" target="_blank">
                     <div class="img-frame">
-                        <img src="thumbnail/${v.img}" 
-                             onerror="this.onerror=null; this.src='${v.img}'; this.addEventListener('error', function(){ this.src='https://img.youtube.com/vi/${v.id}/mqdefault.jpg' });">
+                        <img src="./thumbnail/${v.img}" 
+                             loading="lazy" 
+                             alt="${v.title}"
+                             onerror="this.onerror=null; this.src='./${v.img}'; this.addEventListener('error', function(){ this.src='https://img.youtube.com/vi/${v.id}/mqdefault.jpg' });">
                     </div>
                     <div class="v-title">${v.title}</div>
                     <span class="click-tag">⚡ Click to Watch</span>
