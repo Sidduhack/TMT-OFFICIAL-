@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>TMT OFFICIAL | 1,300+ Gaming Database</title>
+    
+    <link rel="canonical" href="https://tmt-official.netlify.app/" />
+    <meta name="description" content="Official TMT OFFICIAL Gaming Database. Explore 1,300+ Free Fire highlights, headshots, and pro gameplay clips from TMT Rocky.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#050505">
+
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="manifest" href="./site.webmanifest">
-    <link rel="canonical" href="https://tmt-official.netlify.app/" />
-    <meta name="description" content="Official TMT OFFICIAL Gaming Database. Explore 1,300+ Free Fire highlights, headshots, and pro gameplay clips from TMT Rocky.">
-    <meta name="keywords" content="TMT OFFICIAL, TMT Rocky, Free Fire highlights, Gaming Database">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#050505">
     
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -47,55 +48,77 @@
             color: white; outline: none; font-size: 16px; 
         }
         .search-container i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #666; }
+        
         main { display: flex; flex-direction: column; align-items: center; padding: 30px 15px; }
-        .viewer-box { position: relative; width: 100%; max-width: var(--card-w); height: 400px; }
+        .viewer-box { position: relative; width: 100%; max-width: var(--card-w); height: 420px; }
         .card {
             position: absolute; width: 100%; opacity: 0; display: none;
             transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .card.active { display: block; opacity: 1; z-index: 10; }
-        .img-frame { width: 100%; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background: #000; }
+        .img-frame { width: 100%; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
         .img-frame img { width: 100%; height: 100%; object-fit: cover; }
         .v-title { text-align: center; margin-top: 20px; font-weight: 700; font-size: 18px; color: #fff; padding: 0 10px; min-height: 50px; }
-        .click-tag { display: block; text-align: center; color: var(--accent); font-size: 12px; font-weight: 800; margin-top: 10px; text-transform: uppercase; }
+        .click-tag { display: block; text-align: center; color: var(--accent); font-size: 12px; font-weight: 800; margin-top: 5px; text-transform: uppercase; }
+
         .info-grid { display: grid; grid-template-columns: 1fr; gap: 20px; width: 100%; max-width: 950px; margin: 20px auto; padding: 0 15px; }
         @media (min-width: 900px) { .info-grid { grid-template-columns: 1.8fr 1fr; } }
-        .desc-box { padding: 30px; border-radius: 24px; background: var(--glass); border: 1px solid var(--border); }
-        .stats-box { padding: 35px; border-radius: 24px; background: var(--accent); color: #fff; text-align: center; }
+        
+        .description-section { 
+            padding: 35px; border-radius: 28px; background: var(--glass); 
+            border: 1px solid var(--border); line-height: 1.6;
+        }
+        .description-section h2 { font-family: 'Syncopate'; font-size: 14px; color: var(--accent); margin-bottom: 20px; }
+        .description-section p { color: #bbb; font-size: 15px; }
+        .description-section b { color: #fff; font-weight: 700; }
+
+        .stats-box { padding: 40px; border-radius: 28px; background: var(--accent); color: #fff; text-align: center; display: flex; flex-direction: column; justify-content: center; }
+        .stats-box span:first-child { font-size: 10px; font-family: 'Syncopate'; letter-spacing: 2px; opacity: 0.9; }
+        
         .socials { display: flex; justify-content: center; gap: 15px; padding: 20px 15px 80px; flex-wrap: wrap; }
-        .s-btn { padding: 16px 25px; border-radius: 16px; background: var(--glass); border: 1px solid var(--border); color: #fff; font-weight: 700; }
-        @media (max-width: 500px) { :root { --card-w: 100%; } .viewer-box { height: 350px; } .s-btn { width: 100%; } }
+        .s-btn { padding: 16px 28px; border-radius: 18px; background: var(--glass); border: 1px solid var(--border); color: #fff; font-weight: 700; transition: 0.3s; }
+        .s-btn:hover { background: var(--accent); border-color: var(--accent); }
+
+        @media (max-width: 500px) { :root { --card-w: 100%; } .viewer-box { height: 360px; } .s-btn { width: 100%; text-align: center; } }
     </style>
 </head>
 <body>
 
 <header>
     <div class="brand-box">
-        <img src="./logo.png" onerror="this.src='https://www.youtube.com/favicon.ico'" class="logo-img">
+        <img src="./logo.png" class="logo-img" alt="TMT Logo">
         <div class="brand"><h1>TMT OFFICIAL</h1></div>
     </div>
     <div class="search-container">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input id="searchInput" placeholder="Search 1,300+ clips...">
+        <input id="searchInput" placeholder="Search 1,300+ videos...">
     </div>
 </header>
 
-<main><div class="viewer-box" id="viewer-box"></div></main>
+<main>
+    <div class="viewer-box" id="viewer-box"></div>
+</main>
 
 <div class="info-grid">
-    <section class="desc-box">
-        <h2 style="color:var(--accent); font-family:'Syncopate'; font-size:11px; margin-bottom:12px;">⚡ LIVE ARCHIVE</h2>
-        <p style="color:#ccc; font-size: 15px;">Official <span style="color:var(--accent); font-weight:800;">TMT OFFICIAL</span> database. Accessing our high-speed library.</p>
+    <section class="description-section">
+        <h2>🔥 CHANNEL MISSION</h2>
+        <p>
+            Welcome to <b>TMT OFFICIAL</b> – the ultimate destination for high-energy <b>Free Fire gameplay</b>, intense headshot moments, and pure entertainment! 
+            <br><br>
+            This channel is built for gamers who love action, fun, and nonstop excitement. From <b>clutch gameplay</b> to funny moments and epic battles, every video is crafted to keep you hooked till the end. 
+            With over <b>1K+ videos</b> and a growing family of <b>40K+ subscribers</b>, TMT OFFICIAL brings consistent content designed to entertain, inspire, and level up your gaming experience.
+        </p>
     </section>
+
     <section class="stats-box">
-        <span style="font-size:10px; font-family:'Syncopate';">Total Database</span>
-        <span id="vCount" style="font-size:32px; font-weight:900; display:block;">1,300+</span>
+        <span>TOTAL DATABASE</span>
+        <span id="vCount" style="font-size:38px; font-weight:900; display:block; margin-top:10px;">1,300+</span>
     </section>
 </div>
 
 <div class="socials">
-    <a href="https://youtube.com/@tmt_official-y2x" target="_blank" class="s-btn">YouTube</a>
-    <a href="https://www.instagram.com/tmt_rocky_yt" target="_blank" class="s-btn">Instagram</a>
+    <a href="https://youtube.com/@tmt_official-y2x" target="_blank" class="s-btn"><i class="fa-brands fa-youtube"></i> YouTube</a>
+    <a href="https://www.instagram.com/tmt_rocky_yt" target="_blank" class="s-btn"><i class="fa-brands fa-instagram"></i> Instagram</a>
 </div>
 
 <script>
@@ -126,16 +149,13 @@
             filteredData = [...allData];
             render();
             startRotation();
-        } catch (e) { 
-            console.error("Data Load Error"); 
-            vCount.innerText = "1,300+"; 
-        }
+        } catch (e) { vCount.innerText = "1,300+"; }
     }
 
     function render() {
         container.innerHTML = '';
         if(filteredData.length === 0) {
-            container.innerHTML = '<div style="text-align:center;padding:50px;color:#444;">No clips found...</div>';
+            container.innerHTML = '<div style="text-align:center;padding:50px;color:#666;">No results found...</div>';
             return;
         }
         filteredData.forEach((v, i) => {
@@ -143,8 +163,7 @@
             card.className = `card ${i===currentIdx?'active':''}`;
             card.style.display = i===currentIdx ? 'block' : 'none';
             
-            // SEO-Optimized Image Loading
-            // Tries local thumbnail folder -> Tries root folder -> Tries YouTube
+            // Triple-check Image System
             card.innerHTML = `
                 <a href="https://youtube.com/watch?v=${v.id}" target="_blank">
                     <div class="img-frame">
@@ -154,7 +173,7 @@
                              onerror="this.onerror=null; this.src='./${v.img}'; this.addEventListener('error', function(){ this.src='https://img.youtube.com/vi/${v.id}/mqdefault.jpg' });">
                     </div>
                     <div class="v-title">${v.title}</div>
-                    <span class="click-tag">⚡ Click to Watch</span>
+                    <span class="click-tag">⚡ TAP TO WATCH</span>
                 </a>`;
             container.appendChild(card);
         });
@@ -172,7 +191,7 @@
 
     function startRotation() {
         if (rotationTimer) clearInterval(rotationTimer);
-        if (filteredData.length > 1) rotationTimer = setInterval(rotate, 2800);
+        if (filteredData.length > 1) rotationTimer = setInterval(rotate, 3000);
     }
 
     searchInput.addEventListener('input', e => {
