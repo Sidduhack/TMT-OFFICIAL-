@@ -71,7 +71,7 @@
     </div>
     <div class="search-container">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input id="searchInput" placeholder="Search 1,300+ highlights...">
+        <input id="searchInput" placeholder="Search our database...">
     </div>
 </header>
 
@@ -117,6 +117,7 @@
                 };
             });
 
+            // Always show 1,300+ as requested
             vCount.innerText = "1,300+";
             filteredData = [...allData];
             render();
@@ -135,7 +136,8 @@
             card.className = `card ${i===currentIdx?'active':''}`;
             card.style.display = i===currentIdx ? 'block' : 'none';
             
-            // Path fix: Now looking inside /thumbnail/ folder
+            // PATH FIX: Looks inside /thumbnail/ for your .webp files
+            // FALLBACK: If missing, it pulls the image from YouTube
             card.innerHTML = `
                 <a href="https://youtube.com/watch?v=${v.id}" target="_blank">
                     <div class="img-frame">
