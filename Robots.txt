@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 Allow: /assets/
-Allow: .webp
+Allow: /thumbnails/.webp
 Allow: .js
 Allow: .css
 
