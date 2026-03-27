@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Allow: /assets/
+Allow: .webp
+Allow: .js
+Allow: .css
 
 Sitemap: https://tmt-official.netlify.app/sitemap.xml
