@@ -71,7 +71,7 @@
     </div>
     <div class="search-container">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input id="searchInput" placeholder="Search our database...">
+        <input id="searchInput" placeholder="Search 1,300+ highlights...">
     </div>
 </header>
 
@@ -117,7 +117,6 @@
                 };
             });
 
-            // Always show 1,300+ as requested
             vCount.innerText = "1,300+";
             filteredData = [...allData];
             render();
@@ -136,13 +135,15 @@
             card.className = `card ${i===currentIdx?'active':''}`;
             card.style.display = i===currentIdx ? 'block' : 'none';
             
-            // PATH FIX: Looks inside /thumbnail/ for your .webp files
-            // FALLBACK: If missing, it pulls the image from YouTube
+            // TRIPLE-CHECK LOGIC:
+            // 1. Try ./thumbnail/ folder
+            // 2. If fail, try the root folder
+            // 3. If fail, load YouTube MQ Thumbnail
             card.innerHTML = `
                 <a href="https://youtube.com/watch?v=${v.id}" target="_blank">
                     <div class="img-frame">
-                        <img src="./thumbnail/${v.img}" 
-                             onerror="this.onerror=null; this.src='https://img.youtube.com/vi/${v.id}/mqdefault.jpg';">
+                        <img src="thumbnail/${v.img}" 
+                             onerror="this.onerror=null; this.src='${v.img}'; this.addEventListener('error', function(){ this.src='https://img.youtube.com/vi/${v.id}/mqdefault.jpg' });">
                     </div>
                     <div class="v-title">${v.title}</div>
                     <span class="click-tag">⚡ Click to Watch</span>
