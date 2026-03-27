@@ -50,7 +50,7 @@
         .search-container input {
             width: 100%; padding: 14px 15px 14px 45px; border-radius: 14px;
             border: 1px solid var(--border); background: var(--glass);
-            color: white; outline: none; font-size: 16px; /* Fix for Mobile Zoom */
+            color: white; outline: none; font-size: 16px; 
         }
         .search-container i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #666; }
 
@@ -146,11 +146,15 @@
                     img: parts[parts.length - 1]
                 };
             });
-            vCount.innerText = Math.max(1300, allData.length).toLocaleString() + "+";
+            // Ensure bottom text always shows 1,300+ regardless of actual list size
+            vCount.innerText = "1,300+";
             filteredData = [...allData];
             render();
             startRotation();
-        } catch (e) { console.error("CSV Load Error"); }
+        } catch (e) { 
+            console.error("CSV Load Error"); 
+            vCount.innerText = "1,300+";
+        }
     }
 
     function render() {
@@ -164,7 +168,7 @@
             card.className = `card ${i===currentIdx?'active':''}`;
             card.style.display = i===currentIdx ? 'block' : 'none';
             
-            // FALLBACK FIX: If .webp fails, load YouTube thumbnail
+            // FALLBACK FIX: Tries local .webp first. If missing, pulls YouTube thumbnail.
             card.innerHTML = `
                 <a href="https://youtube.com/watch?v=${v.id}" target="_blank">
                     <div class="img-frame">
