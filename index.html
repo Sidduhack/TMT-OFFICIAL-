@@ -123,39 +123,36 @@
 
     async function init() {
         try {
-            // Load CSV with cache-busting
             const res = await fetch('./data.csv?v=' + Date.now());
             const text = await res.text();
             
-            // Fixed Parsing Logic: Handle titles with commas properly
-            allData = text.split('\n').filter(line => line.trim().length > 5).map(line => {
-                const parts = line.split(',');
-                // Assumes format: Title,YouTubeID,ThumbnailFileName
-                return {
-                    img: parts.pop().trim(),
-                    id: parts.pop().trim(),
-                    title: parts.join(',').trim()
-                };
+            // This regex handles multiple spaces or tabs between your columns
+            allData = text.split('\n').filter(line => line.trim().length > 10).map(line => {
+                const parts = line.trim().split(/\s+/); // Splits by any whitespace
+                const img = parts.pop();    // Last item (e.g., 001.webp)
+                const id = parts.pop();     // Second to last (YouTube ID)
+                const title = parts.join(' '); // Everything else is the title
+                return { title, id, img };
             });
 
             if (allData.length > 0) {
-                updateUI(0);
-                startAutoRotation();
+                render(0);
+                startRotation();
             }
         } catch (err) {
-            container.innerHTML = `<p style="color:red; text-align:center;">Failed to load video database.</p>`;
+            container.innerHTML = `<p style="text-align:center; color:red;">Check data.csv formatting.</p>`;
         }
     }
 
-    function updateUI(index) {
+    function render(index) {
         const item = allData[index];
-        // Ensure image path includes the /thumbnail/ folder prefix
-        const imagePath = item.img.startsWith('http') ? item.img : `./thumbnail/${item.img}`;
+        // Pointing to your 'thumbnails' folder as seen in Git
+        const imagePath = `./thumbnails/${item.img}`; 
         
         container.innerHTML = `
             <a href="https://www.youtube.com{item.id}" target="_blank" class="card">
                 <div class="img-frame">
-                    <img src="${imagePath}" onerror="this.src='./logo.png'" alt="${item.title}">
+                    <img src="${imagePath}" onerror="this.src='./logo.png'" alt="Thumbnail">
                 </div>
                 <div class="v-title">${item.title}</div>
                 <span class="click-tag">Click to Watch Now</span>
@@ -163,11 +160,11 @@
         `;
     }
 
-    function startAutoRotation() {
+    function startRotation() {
         setInterval(() => {
             if (searchInput.value === "") {
                 currentIdx = (currentIdx + 1) % allData.length;
-                updateUI(currentIdx);
+                render(currentIdx);
             }
         }, 6000);
     }
@@ -177,12 +174,13 @@
         const match = allData.findIndex(item => item.title.toLowerCase().includes(term));
         if (match !== -1) {
             currentIdx = match;
-            updateUI(match);
+            render(match);
         }
     });
 
     init();
 </script>
+    
 
 </body>
 </html>
