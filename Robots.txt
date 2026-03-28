@@ -1,8 +1,5 @@
 User-agent: *
 Allow: /
-Allow: /assets/
+Disallow: /data.csv
 
-Allow: .js
-Allow: .css
-
-Sitemap: https://tmt-official.netlify.app/sitemap.xml
+Sitemap: https://tmt-official.netlify.app
