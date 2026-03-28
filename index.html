@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>TMT OFFICIAL |Team Telugu Official| website 50k special</title>
+    <title>TMT OFFICIAL | Team Telugu Official | 50K Special</title>
     
     <link rel="canonical" href="https://tmt-official.netlify.app/" />
     <meta name="description" content="Official TMT OFFICIAL Gaming Database. Explore 1,300+ Free Fire highlights, headshots, and pro gameplay clips from TMT Rocky.">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#050505">
 
+    <!-- Icons -->
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-    <link rel="manifest" href="./site.webmanifest">
     
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -51,14 +49,14 @@
         .search-container i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #666; }
         
         main { display: flex; flex-direction: column; align-items: center; padding: 30px 15px; }
-        .viewer-box { position: relative; width: 100%; max-width: var(--card-w); height: 420px; }
-        .card {
-            position: absolute; width: 100%; opacity: 0; display: none;
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .card.active { display: block; opacity: 1; z-index: 10; }
+        .viewer-box { position: relative; width: 100%; max-width: var(--card-w); min-height: 380px; }
         
-        /* HD IMAGE STYLING */
+        .card {
+            width: 100%; transition: all 0.5s ease;
+            display: none; animation: fadeIn 0.5s ease forwards;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
         .img-frame { 
             width: 100%; aspect-ratio: 16/9; border-radius: 20px; 
             overflow: hidden; border: 1px solid var(--border); 
@@ -66,11 +64,11 @@
         }
         .img-frame img { 
             width: 100%; height: 100%; object-fit: cover; 
-            image-rendering: -webkit-optimize-contrast; /* HD Sharpening */
+            image-rendering: -webkit-optimize-contrast;
         }
         
-        .v-title { text-align: center; margin-top: 20px; font-weight: 700; font-size: 18px; color: #fff; padding: 0 10px; min-height: 50px; }
-        .click-tag { display: block; text-align: center; color: var(--accent); font-size: 12px; font-weight: 800; margin-top: 5px; text-transform: uppercase; }
+        .v-title { text-align: center; margin-top: 20px; font-weight: 700; font-size: 18px; color: #fff; padding: 0 10px; }
+        .click-tag { display: block; text-align: center; color: var(--accent); font-size: 12px; font-weight: 800; margin-top: 8px; text-transform: uppercase; letter-spacing: 1px; }
 
         .info-grid { display: grid; grid-template-columns: 1fr; gap: 20px; width: 100%; max-width: 950px; margin: 20px auto; padding: 0 15px; }
         @media (min-width: 900px) { .info-grid { grid-template-columns: 1.8fr 1fr; } }
@@ -81,16 +79,12 @@
         }
         .description-section h2 { font-family: 'Syncopate'; font-size: 14px; color: var(--accent); margin-bottom: 20px; }
         .description-section p { color: #bbb; font-size: 15px; }
-        .description-section b { color: #fff; font-weight: 700; }
 
-        .stats-box { padding: 40px; border-radius: 28px; background: var(--accent); color: #fff; text-align: center; display: flex; flex-direction: column; justify-content: center; }
-        .stats-box span:first-child { font-size: 10px; font-family: 'Syncopate'; letter-spacing: 2px; opacity: 0.9; }
+        .stats-box { padding: 40px; border-radius: 28px; background: var(--accent); color: #fff; text-align: center; }
         
         .socials { display: flex; justify-content: center; gap: 15px; padding: 20px 15px 80px; flex-wrap: wrap; }
         .s-btn { padding: 16px 28px; border-radius: 18px; background: var(--glass); border: 1px solid var(--border); color: #fff; font-weight: 700; transition: 0.3s; }
         .s-btn:hover { background: var(--accent); border-color: var(--accent); }
-
-        @media (max-width: 500px) { :root { --card-w: 100%; } .viewer-box { height: 360px; } .s-btn { width: 100%; text-align: center; } }
     </style>
 </head>
 <body>
@@ -107,22 +101,23 @@
 </header>
 
 <main>
-    <div class="viewer-box" id="viewer-box"></div>
+    <div class="viewer-box" id="viewer-box">
+        <!-- JS will inject cards here -->
+    </div>
 </main>
 
 <div class="info-grid">
     <section class="description-section">
         <h2>🔥 CHANNEL MISSION</h2>
         <p>
-            Welcome to <b>TMT OFFICIAL</b> – the ultimate destination for high-energy <b>Free Fire gameplay</b>, intense headshot moments, and pure <b>entertainmente</b>! 
+            Welcome to <b>TMT OFFICIAL</b> – the ultimate destination for high-energy <b>Free Fire gameplay</b>, intense headshot moments, and pure <b>entertainment</b>! 
             <br><br>
-            This channel is built for gamers who love action, <b> fun</b> , and nonstop excitement. From <b>clutch gameplay</b> to funny moments and epic battles, every video is crafted to keep you hooked till the end. 
-            With over <b>1K+ videos</b> and a growing family of <b>40K+ subscribers</b>, TMT OFFICIAL brings consistent content designed to entertain, inspire, and level up your gaming experience.
+            This channel is built for gamers who love action, fun, and nonstop excitement. With over <b>1,300+ videos</b> and a growing family of <b>50K+ subscribers</b>.
         </p>
     </section>
 
     <section class="stats-box">
-        <span>Total Video's</span>
+        <span style="font-family: 'Syncopate'; font-size: 10px; letter-spacing: 2px;">TOTAL VIDEOS</span>
         <span id="vCount" style="font-size:38px; font-weight:900; display:block; margin-top:10px;">1,300+</span>
     </section>
 </div>
@@ -135,88 +130,57 @@
 <script>
     const container = document.getElementById('viewer-box');
     const searchInput = document.getElementById('searchInput');
-    const vCount = document.getElementById('vCount');
-
     let allData = [];
-    let filteredData = [];
     let currentIdx = 0;
-    let rotationTimer = null;
 
     async function init() {
         try {
-            const res = await fetch('./data.csv?v=' + Date.now());
+            const res = await fetch('./data.csv');
             const text = await res.text();
             
-            allData = text.split('\n').map(l => l.trim()).filter(l => l.length > 5).map(line => {
+            allData = text.split('\n').filter(l => l.trim().length > 5).map(line => {
                 const parts = line.split(',');
                 return {
-                    title: parts.slice(0, -2).join(','), 
-                    id: parts[parts.length - 2],
-                    img: parts[parts.length - 1]
+                    title: parts[0], 
+                    id: parts[1],
+                    img: parts[2]
                 };
             });
 
-            vCount.innerText = "1,300+";
-            filteredData = [...allData];
-            render();
+            showCard(0);
             startRotation();
-        } catch (e) { vCount.innerText = "1,300+"; }
+        } catch (e) { console.error("Data load failed"); }
     }
 
-    function render() {
-        container.innerHTML = '';
-        if(filteredData.length === 0) {
-            container.innerHTML = '<div style="text-align:center;padding:50px;color:#666;">No results found...</div>';
-            return;
-        }
-        filteredData.forEach((v, i) => {
-            const card = document.createElement('div');
-            card.className = `card ${i===currentIdx?'active':''}`;
-            card.style.display = i===currentIdx ? 'block' : 'none';
-            
-            // ULTRA HD FALLBACK SYSTEM
-            // 1. Tries local webp
-            // 2. Tries YouTube Max Resolution (1080p)
-            // 3. Tries YouTube High Quality (480p) as final safety
-            card.innerHTML = `
-                <a href="https://youtube.com/watch?v=${v.id}" target="_blank">
-                    <div class="img-frame">
-                        <img src="./thumbnail/${v.img}" 
-                             loading="lazy" 
-                             alt="${v.title}"
-                             onerror="this.onerror=null; this.src='https://img.youtube.com/vi/${v.id}/maxresdefault.jpg'; this.addEventListener('error', function(){ this.src='https://img.youtube.com/vi/${v.id}/hqdefault.jpg' });">
-                    </div>
-                    <div class="v-title">${v.title}</div>
-                    <span class="click-tag">⚡ TAP TO WATCH</span>
-                </a>`;
-            container.appendChild(card);
-        });
-    }
-
-    function rotate() {
-        const cards = document.querySelectorAll('.card');
-        if (cards.length <= 1) return;
-        cards[currentIdx].classList.remove('active');
-        cards[currentIdx].style.display = 'none';
-        currentIdx = (currentIdx + 1) % cards.length;
-        cards[currentIdx].style.display = 'block';
-        setTimeout(() => cards[currentIdx].classList.add('active'), 50);
+    function showCard(index) {
+        if (!allData.length) return;
+        const item = allData[index];
+        container.innerHTML = `
+            <a href="https://www.youtube.com{item.id}" target="_blank" class="card" style="display:block">
+                <div class="img-frame"><img src="${item.img}" alt="Thumbnail"></div>
+                <div class="v-title">${item.title}</div>
+                <span class="click-tag">Click to Watch Now</span>
+            </a>
+        `;
     }
 
     function startRotation() {
-        if (rotationTimer) clearInterval(rotationTimer);
-        if (filteredData.length > 1) rotationTimer = setInterval(rotate, 3000);
+        setInterval(() => {
+            if (searchInput.value === "") { // Only rotate if not searching
+                currentIdx = (currentIdx + 1) % allData.length;
+                showCard(currentIdx);
+            }
+        }, 5000);
     }
 
-    searchInput.addEventListener('input', e => {
+    searchInput.addEventListener('input', (e) => {
         const term = e.target.value.toLowerCase();
-        filteredData = allData.filter(v => v.title.toLowerCase().includes(term));
-        currentIdx = 0;
-        render();
-        startRotation();
+        const found = allData.findIndex(item => item.title.toLowerCase().includes(term));
+        if (found !== -1) showCard(found);
     });
 
-    window.onload = init;
+    init();
 </script>
+
 </body>
 </html>
