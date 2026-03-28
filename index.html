@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>TMT OFFICIAL |Team Telugu Official| website 50k special</title>
+    <title>TMT OFFICIAL | 1,300+ Gaming Database</title>
     
     <link rel="canonical" href="https://tmt-official.netlify.app/" />
     <meta name="description" content="Official TMT OFFICIAL Gaming Database. Explore 1,300+ Free Fire highlights, headshots, and pro gameplay clips from TMT Rocky.">
@@ -41,6 +41,7 @@
         .brand-box { display: flex; align-items: center; gap: 12px; }
         .logo-img { width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--accent); object-fit: cover; }
         .brand h1 { font-family: 'Syncopate'; font-size: 13px; letter-spacing: 1px; }
+        
         .search-container { position: relative; width: 100%; }
         .search-container input {
             width: 100%; padding: 14px 15px 14px 45px; border-radius: 14px;
@@ -56,8 +57,18 @@
             transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .card.active { display: block; opacity: 1; z-index: 10; }
-        .img-frame { width: 100%; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        .img-frame img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* HD IMAGE STYLING */
+        .img-frame { 
+            width: 100%; aspect-ratio: 16/9; border-radius: 20px; 
+            overflow: hidden; border: 1px solid var(--border); 
+            background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.5); 
+        }
+        .img-frame img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            image-rendering: -webkit-optimize-contrast; /* HD Sharpening */
+        }
+        
         .v-title { text-align: center; margin-top: 20px; font-weight: 700; font-size: 18px; color: #fff; padding: 0 10px; min-height: 50px; }
         .click-tag { display: block; text-align: center; color: var(--accent); font-size: 12px; font-weight: 800; margin-top: 5px; text-transform: uppercase; }
 
@@ -103,15 +114,15 @@
     <section class="description-section">
         <h2>🔥 CHANNEL MISSION</h2>
         <p>
-            Welcome to <b>TMT OFFICIAL</b> – the ultimate destination for high-energy <b>Free Fire gameplay</b>, intense headshot moments, and pure <b>entertainment!</b> 
+            Welcome to <b>TMT OFFICIAL</b> – the ultimate destination for high-energy <b>Free Fire gameplay</b>, intense headshot moments, and pure entertainment! 
             <br><br>
             This channel is built for gamers who love action, fun, and nonstop excitement. From <b>clutch gameplay</b> to funny moments and epic battles, every video is crafted to keep you hooked till the end. 
-            With over <b>1K+ videos</b> and a growing family of <b>50K+ subscribers</b>, TMT OFFICIAL brings consistent content designed to entertain, inspire, and level up your gaming experience.
+            With over <b>1K+ videos</b> and a growing family of <b>40K+ subscribers</b>, TMT OFFICIAL brings consistent content designed to entertain, inspire, and level up your gaming experience.
         </p>
     </section>
 
     <section class="stats-box">
-        <span>TOTAL VIDEO's</span>
+        <span>TOTAL DATABASE</span>
         <span id="vCount" style="font-size:38px; font-weight:900; display:block; margin-top:10px;">1,300+</span>
     </section>
 </div>
@@ -163,14 +174,17 @@
             card.className = `card ${i===currentIdx?'active':''}`;
             card.style.display = i===currentIdx ? 'block' : 'none';
             
-            // Triple-check Image System
+            // ULTRA HD FALLBACK SYSTEM
+            // 1. Tries local webp
+            // 2. Tries YouTube Max Resolution (1080p)
+            // 3. Tries YouTube High Quality (480p) as final safety
             card.innerHTML = `
                 <a href="https://youtube.com/watch?v=${v.id}" target="_blank">
                     <div class="img-frame">
                         <img src="./thumbnail/${v.img}" 
                              loading="lazy" 
                              alt="${v.title}"
-                             onerror="this.onerror=null; this.src='./${v.img}'; this.addEventListener('error', function(){ this.src='https://img.youtube.com/vi/${v.id}/mqdefault.jpg' });">
+                             onerror="this.onerror=null; this.src='https://img.youtube.com/vi/${v.id}/maxresdefault.jpg'; this.addEventListener('error', function(){ this.src='https://img.youtube.com/vi/${v.id}/hqdefault.jpg' });">
                     </div>
                     <div class="v-title">${v.title}</div>
                     <span class="click-tag">⚡ TAP TO WATCH</span>
