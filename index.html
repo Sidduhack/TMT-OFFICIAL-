@@ -205,7 +205,7 @@
 
     function startRotation() {
         if (rotationTimer) clearInterval(rotationTimer);
-        if (filteredData.length > 1) rotationTimer = setInterval(rotate, 3000);
+        if (filteredData.length > 1) rotationTimer = setInterval(rotate, 2500);
     }
 
     searchInput.addEventListener('input', e => {
