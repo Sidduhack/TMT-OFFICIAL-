@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /data.csv
 
-Sitemap: https://tmt-official.netlify.app
+Sitemap: https://tmt-official.co.in
