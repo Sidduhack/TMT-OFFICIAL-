@@ -218,5 +218,17 @@
 
     window.onload = init;
 </script>
+
+<!-- Vercel Speed Insights -->
+<script type="module">
+    import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@2.0.0/dist/index.mjs';
+    
+    // Initialize Speed Insights
+    injectSpeedInsights({
+        framework: 'vanilla',
+        route: window.location.pathname
+    });
+</script>
+
 </body>
 </html>
